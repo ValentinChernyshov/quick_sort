@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function quick_Sort(array) {
+      if(array.length <= 1) { 
+          return array;
+      } else {
+          var left = [];
+          var right = [];
+          var newArray = [];
+          var pivot = array.pop();
+//          var pivot = array[Math.round(array.length / 2)];
+          for(var i = 0; i < array.length; i++) {
+              if(array[i] <= pivot) {
+                  left.push(array[i]);
+              }else {
+                  right.push(array[i]);
+              }
+          }
+          return newArray.concat(quick_Sort(left), pivot, quick_Sort(right));
+      }
+    }
+    
+    function bench(f, arr) {
+      var date = new Date();
+      for (var i = 0; i < 10000; i++) f(arr);
+      return new Date() - date;
+    }
+    
+    var myArray = [3, 0, 2, 5, -1, 4, 1 ];
+    alert("Original array: " + myArray);
+    var sortedArray = quick_Sort(myArray);
+    alert("Sorted array: " + sortedArray);
+    alert( 'Time spent on quick sort: ' + bench(quick_Sort, myArray) + 'мс' );
+    
+    
+    var newArr = [];
+    function createNewArr(){
+      while(true){
+        var value = prompt("Please enter a new number to place in the array for sorting.", 0);
+        if (value === "" || value === null || isNaN(value)) 
+          break;
+        newArr.push(value);
+      }
+    }
+    
+    createNewArr();
+    alert("Original array: " + newArr);
+    var sortedArray2 = quick_Sort(newArr);
+    alert("Sorted array: " + sortedArray2);
+    alert( 'Time spent on quick sort: ' + bench(quick_Sort, newArr) + 'мс' );
+    
+  </script>
+</body>
+</html>
